@@ -1,7 +1,6 @@
-package at.wle.games.firstGame;
+package FirstGame;
 
 import org.newdawn.slick.*;
-import org.newdawn.slick.tests.AnimationTest;
 
 public class Rectangles extends BasicGame {
 
