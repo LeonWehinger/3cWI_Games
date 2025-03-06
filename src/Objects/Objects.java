@@ -1,12 +1,13 @@
 package Objects;
-
 import org.newdawn.slick.*;
+
+import javax.swing.plaf.LabelUI;
+import java.util.List;
+import java.util.Random;
 
 public class Objects extends BasicGame {
 
-    private Rect rect;
-    private Rect rect2;
-    private Rect rect3;
+    private List<Rect> rectList;
 
 
     public Objects(String title) {
@@ -16,9 +17,11 @@ public class Objects extends BasicGame {
     @Override
     public void init(GameContainer gameContainer) throws SlickException {
 
-        this.rect = new Rect(100, 100, 1.5, Rect.Direction.RIGHT);
-        this.rect2 = new Rect(160, 100, 1.5, Rect.Direction.RIGHT);
-        this.rect3 = new Rect(220, 100, 1.5, Rect.Direction.RIGHT);
+        Random random = new Random();
+
+        for (int i = 0; i < 20; i++){
+            Rect rect = new Rect(100,100,random.nextInt(4)+1, Rect.Direction.RIGHT);
+        }
 
     }
 
