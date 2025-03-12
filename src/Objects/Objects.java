@@ -2,6 +2,7 @@ package Objects;
 import org.newdawn.slick.*;
 
 import javax.swing.plaf.LabelUI;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -18,19 +19,20 @@ public class Objects extends BasicGame {
     public void init(GameContainer gameContainer) throws SlickException {
 
         Random random = new Random();
+        this.rectList = new ArrayList<>();
 
-        for (int i = 0; i < 20; i++){
-            Rect rect = new Rect(100,100,random.nextInt(4)+1, Rect.Direction.RIGHT);
+        for (int i = 0; i < 100; i++){
+            Rect rect = new Rect(100,100,random.nextDouble()+0.5, Rect.Direction.RIGHT);
+            rectList.add(rect);
         }
-
     }
 
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
 
-        this.rect.update(delta);
-        this.rect2.update(delta);
-        this.rect3.update(delta);
+    for (Rect rect: this.rectList){
+        rect.update(delta);
+    }
 
 
     }
@@ -39,9 +41,9 @@ public class Objects extends BasicGame {
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
 
 
-        this.rect.render(graphics);
-        this.rect2.render(graphics);
-        this.rect3.render(graphics);
+        for (Rect rect:this.rectList){
+            rect.render(graphics);
+        }
 
 
     }
