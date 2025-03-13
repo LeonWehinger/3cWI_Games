@@ -1,4 +1,5 @@
 package Objects;
+
 import org.newdawn.slick.*;
 
 import javax.swing.plaf.LabelUI;
@@ -8,8 +9,7 @@ import java.util.Random;
 
 public class Objects extends BasicGame {
 
-    private List<Rect> rectList;
-    private List<Circle> circleList;
+    private List<Forms> formList;
 
 
     public Objects(String title) {
@@ -20,28 +20,25 @@ public class Objects extends BasicGame {
     public void init(GameContainer gameContainer) throws SlickException {
 
         Random random = new Random();
-        this.rectList = new ArrayList<>();
-        this.circleList = new ArrayList<>();
+        this.formList = new ArrayList<>();
 
-        for (int i = 0; i < 100; i++){
-            Rect rect = new Rect(100,100,random.nextDouble()+0.5, Rect.Direction.RIGHT);
-            rectList.add(rect);
+        for (int i = 0; i < 100; i++) {
+            Rect rect = new Rect(100, 100, random.nextDouble() + 0.5, Rect.Direction.RIGHT);
+            this.formList.add(rect);
         }
-        for (int i = 0; i < 1000; i++){
-            Circle circle = new Circle(random.nextInt(800),0 , random.nextDouble()+2.5);
-            circleList.add(circle);
+        for (int i = 0; i < 1000; i++) {
+            Circle circle = new Circle(random.nextInt(800), 0, random.nextDouble() + 2.5);
+            this.formList.add(circle);
         }
     }
 
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
 
-    for (Rect rect: this.rectList){
-        rect.update(delta);
-    }
-    for (Circle circle: this.circleList){
-        circle.update(delta);
-    }
+        for (Forms forms : this.formList) {
+            forms.update(delta);
+        }
+
 
     }
 
@@ -49,12 +46,8 @@ public class Objects extends BasicGame {
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
 
 
-        for (Rect rect:this.rectList){
-            rect.render(graphics);
-        }
-
-        for (Circle circle:this.circleList){
-            circle.render(graphics);
+        for (Forms forms : this.formList) {
+            forms.render(graphics);
         }
 
 

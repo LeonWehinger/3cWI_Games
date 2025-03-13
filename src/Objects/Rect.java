@@ -2,7 +2,7 @@ package Objects;
 
 import org.newdawn.slick.Graphics;
 
-public class Rect {
+public class Rect implements Forms {
 
     enum Direction {RIGHT, LEFT, DOWN, UP}
 
@@ -22,6 +22,7 @@ public class Rect {
 
 
     public void update(int delta) {
+
 
         if (direction == Direction.RIGHT) {
             this.x += (float) delta / this.speed;
