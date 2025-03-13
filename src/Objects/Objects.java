@@ -9,6 +9,7 @@ import java.util.Random;
 public class Objects extends BasicGame {
 
     private List<Rect> rectList;
+    private List<Circle> circleList;
 
 
     public Objects(String title) {
@@ -20,10 +21,15 @@ public class Objects extends BasicGame {
 
         Random random = new Random();
         this.rectList = new ArrayList<>();
+        this.circleList = new ArrayList<>();
 
         for (int i = 0; i < 100; i++){
             Rect rect = new Rect(100,100,random.nextDouble()+0.5, Rect.Direction.RIGHT);
             rectList.add(rect);
+        }
+        for (int i = 0; i < 1000; i++){
+            Circle circle = new Circle(random.nextInt(800),0 , random.nextDouble()+2.5);
+            circleList.add(circle);
         }
     }
 
@@ -33,7 +39,9 @@ public class Objects extends BasicGame {
     for (Rect rect: this.rectList){
         rect.update(delta);
     }
-
+    for (Circle circle: this.circleList){
+        circle.update(delta);
+    }
 
     }
 
@@ -43,6 +51,10 @@ public class Objects extends BasicGame {
 
         for (Rect rect:this.rectList){
             rect.render(graphics);
+        }
+
+        for (Circle circle:this.circleList){
+            circle.render(graphics);
         }
 
 
