@@ -7,6 +7,7 @@ import java.util.Random;
 public class Circle implements Forms {
     private float x, y;
     private double speed;
+    private float radius = 10;
 
 
     public Circle(float x, float y, double speed) {
@@ -18,6 +19,7 @@ public class Circle implements Forms {
     public void update(int delta) {
 
         this.y += delta / this.speed;
+        radius += 0.01;
         if (this.y >= 600) {
             this.y = 0;
         }
@@ -27,7 +29,7 @@ public class Circle implements Forms {
 
     public void render(Graphics graphics) {
 
-        graphics.drawOval(this.x, this.y, 10, 10);
+        graphics.drawOval(this.x, this.y, radius, radius);
     }
 
 

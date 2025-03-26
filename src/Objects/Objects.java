@@ -10,6 +10,7 @@ import java.util.Random;
 public class Objects extends BasicGame {
 
     private List<Forms> formList;
+    private boolean aBoolean;
 
 
     public Objects(String title) {
@@ -22,14 +23,19 @@ public class Objects extends BasicGame {
         Random random = new Random();
         this.formList = new ArrayList<>();
 
-        for (int i = 0; i < 100; i++) {
-            Rect rect = new Rect(100, 100, random.nextDouble() + 0.5, Rect.Direction.RIGHT);
+        for (int i = 0; aBoolean; i++) {
+            Rect rect = new Rect(random.nextInt(800), random.nextInt(600), random.nextDouble() + 1, Rect.Direction.RIGHT);
             this.formList.add(rect);
         }
-        for (int i = 0; i < 1000; i++) {
-            Circle circle = new Circle(random.nextInt(800), 0, random.nextDouble() + 2.5);
+        for (int i = 0; i < 200; i++) {
+            Circle circle = new Circle(random.nextInt(800), random.nextInt(600), random.nextDouble() + 2.5);
             this.formList.add(circle);
         }
+        for (int i = 0; i < 200; i++) {
+            Oval oval = new Oval(random.nextInt(800), random.nextInt(600), random.nextFloat() + 1.5f);
+            this.formList.add(oval);
+        }
+
     }
 
     @Override

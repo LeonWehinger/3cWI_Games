@@ -4,13 +4,14 @@ import org.newdawn.slick.Graphics;
 
 public class Rect implements Forms {
 
-    enum Direction {RIGHT, LEFT, DOWN, UP}
 
-    ;
     private float x;
     private float y;
     private double speed;
-    private Direction direction;
+
+    public enum Direction {RIGHT, LEFT}
+
+    public Direction direction;
 
 
     public Rect(int x, int y, double speed, Direction direction) {
@@ -23,29 +24,16 @@ public class Rect implements Forms {
 
     public void update(int delta) {
 
-
         if (direction == Direction.RIGHT) {
             this.x += (float) delta / this.speed;
-            if (this.x > 650) {
-                direction = Direction.DOWN;
-            }
-        }
-        if (direction == Direction.DOWN) {
-            this.y += (float) delta / this.speed;
-            if (this.y > 450) {
-                direction = Direction.LEFT;
+            if (this.x >= 800) {
+                this.x = 0;
             }
         }
         if (direction == Direction.LEFT) {
             this.x -= (float) delta / this.speed;
-            if (this.x < 100) {
-                direction = Direction.UP;
-            }
-        }
-        if (direction == Direction.UP) {
-            this.y -= (float) delta / this.speed;
-            if (this.y < 100) {
-                direction = Direction.RIGHT;
+            if (this.x <= 0) {
+                this.x = 800;
             }
         }
 
@@ -55,7 +43,7 @@ public class Rect implements Forms {
 
     public void render(Graphics graphics) {
 
-        graphics.drawRect(this.x, this.y, 50, 50);
+        graphics.drawRect(this.x, this.y, 10, 10);
     }
 
 
