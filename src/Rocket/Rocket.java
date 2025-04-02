@@ -1,8 +1,6 @@
 package Rocket;
 
-import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
-import org.newdawn.slick.SlickException;
+import org.newdawn.slick.*;
 
 public class Rocket implements Actor {
     private float x, y;
@@ -22,11 +20,33 @@ public class Rocket implements Actor {
     }
 
     @Override
-    public void update(int delta) {
-
-        this.y -= (float) delta / 2;
-        if (this.y <= -200) {
-            this.y = 650;
+    public void update(GameContainer gameContainer, int delta) {
+        if (gameContainer.getInput().isKeyDown(Input.KEY_W)) {
+            if (this.y >= -50) {
+                this.y -= (float) delta / 2;
+            }
         }
+        if (gameContainer.getInput().isKeyDown(Input.KEY_D)) {
+            this.x += (float) delta / 2;
+        }
+        if (gameContainer.getInput().isKeyDown(Input.KEY_A)) {
+            this.x -= (float) delta / 2;
+        }
+        if (gameContainer.getInput().isKeyDown(Input.KEY_S)) {
+            if (this.y <= 390) {
+                this.y += (float) delta / 2;
+            }
+
+        }
+
+        if (this.x >= 650) {
+            this.x = -250;
+        }
+
+        if (this.x <= -260) {
+            this.x = 640;
+        }
+
+
     }
 }

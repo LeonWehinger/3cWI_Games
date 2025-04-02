@@ -27,7 +27,7 @@ public class RocketMain extends BasicGame {
     public void update(GameContainer gameContainer, int delta) throws SlickException {
 
         for (Actor actor : rocketList) {
-            actor.update(delta);
+            actor.update(gameContainer, delta);
         }
 
     }
