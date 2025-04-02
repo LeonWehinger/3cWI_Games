@@ -20,17 +20,23 @@ public class RocketMain extends BasicGame {
     public void init(GameContainer gameContainer) throws SlickException {
         this.rocketList = new ArrayList<>();
         Rocket rocket = new Rocket();
-        this.rocketList.add(rocket);
+        rocketList.add(rocket);
     }
 
     @Override
-    public void update(GameContainer gameContainer, int i) throws SlickException {
+    public void update(GameContainer gameContainer, int delta) throws SlickException {
+
+        for (Actor actor : rocketList) {
+            actor.update(delta);
+        }
 
     }
 
     @Override
     public void render(GameContainer gameContainer, Graphics graphics) throws SlickException {
-
+        for (Actor actor : rocketList) {
+            actor.render(graphics);
+        }
     }
 
 
