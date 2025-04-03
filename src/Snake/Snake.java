@@ -5,47 +5,94 @@ import org.newdawn.slick.*;
 
 public class Snake implements Actor {
     private float x, y;
+    private int currentKey;
+    private boolean movingUp = false;
+    private boolean movingDown = false;
+    private boolean movingRight = false;
+    private boolean movingLeft = false;
+    private boolean isHead = false;
 
 
-
-    public Snake() throws SlickException {
-        this.x = 100;
-        this.y = 100;
+    public Snake(float x, float y) throws SlickException {
+        this.x = x;
+        this.y = y;
     }
 
     @Override
     public void render(Graphics graphics) {
-        graphics.fillRect(x,y,30,30);
+        graphics.fillRect(x, y, 30, 30);
     }
 
     @Override
     public void update(GameContainer gameContainer, int delta) {
-        if (gameContainer.getInput().isKeyDown(Input.KEY_W)) {
-            if (this.y >= -50) {
+
+        if (isHead){
+            if (gameContainer.getInput().isKeyPressed(Input.KEY_W)) {
+                this.movingUp = true;
+                this.movingLeft = false;
+                this.movingRight = false;
+                this.movingDown = false;
+            }
+            if (gameContainer.getInput().isKeyPressed(Input.KEY_D)) {
+                this.movingRight = true;
+                this.movingDown = false;
+                this.movingUp = false;
+                this.movingLeft = false;
+
+            }
+            if (gameContainer.getInput().isKeyPressed(Input.KEY_A)) {
+                this.movingLeft = true;
+                this.movingRight = false;
+                this.movingDown = false;
+                this.movingUp = false;
+            }
+            if (gameContainer.getInput().isKeyPressed(Input.KEY_S)) {
+                this.movingDown = true;
+                this.movingUp = false;
+                this.movingLeft = false;
+                this.movingRight = false;
+
+            }
+
+            if (this.y >= 600) {
+                this.y = 0;
+            }
+
+            if (this.y <= -30) {
+                this.y = 600;
+            }
+
+            if (this.x >= 800) {
+                this.x = 0;
+            }
+
+            if (this.x <= -30) {
+                this.x = 800;
+            }
+
+            if (movingUp) {
                 this.y -= (float) delta / 2;
             }
-        }
-        if (gameContainer.getInput().isKeyDown(Input.KEY_D)) {
-            this.x += (float) delta / 2;
-        }
-        if (gameContainer.getInput().isKeyDown(Input.KEY_A)) {
-            this.x -= (float) delta / 2;
-        }
-        if (gameContainer.getInput().isKeyDown(Input.KEY_S)) {
-            if (this.y <= 390) {
+            if (movingDown) {
                 this.y += (float) delta / 2;
             }
-
-        }
-
-        if (this.x >= 650) {
-            this.x = -250;
-        }
-
-        if (this.x <= -260) {
-            this.x = 640;
+            if (movingRight) {
+                this.x += (float) delta / 2;
+            }
+            if (movingLeft) {
+                this.x -= (float) delta / 2;
+            }
         }
 
 
+
+    }
+
+    public boolean isHead() {
+        return isHead;
+    }
+
+    public void setHead(boolean head) {
+        isHead = head;
     }
 }
