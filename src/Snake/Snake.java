@@ -3,6 +3,8 @@ package Snake;
 import Snake.Actor;
 import org.newdawn.slick.*;
 
+import java.util.LinkedList;
+
 public class Snake implements Actor {
     private float x, y;
     private int currentKey;
@@ -11,6 +13,7 @@ public class Snake implements Actor {
     private boolean movingRight = false;
     private boolean movingLeft = false;
     private boolean isHead = false;
+
 
 
     public Snake(float x, float y) throws SlickException {
@@ -26,6 +29,14 @@ public class Snake implements Actor {
     @Override
     public void update(GameContainer gameContainer, int delta) {
 
+
+    }
+
+    public boolean isHead() {
+        return isHead;
+    }
+
+    public void move(GameContainer gameContainer, int delta, LinkedList<Snake> snakelist, Snake changePos){
         if (isHead){
             if (gameContainer.getInput().isKeyPressed(Input.KEY_W)) {
                 this.movingUp = true;
@@ -71,28 +82,49 @@ public class Snake implements Actor {
             }
 
             if (movingUp) {
-                this.y -= (float) delta / 2;
+                snakelist.getLast().setY(snakelist.getFirst().getY() - (float) delta /2);
+                snakelist.getLast().setX(snakelist.getFirst().getX());
+                snakelist.remove(changePos);
+                snakelist.add(0,changePos);
             }
             if (movingDown) {
-                this.y += (float) delta / 2;
+                snakelist.getLast().setY(snakelist.getFirst().getY() + (float) delta /2);
+                snakelist.getLast().setX(snakelist.getFirst().getX());
+                snakelist.remove(changePos);
+                snakelist.add(0,changePos);
             }
             if (movingRight) {
-                this.x += (float) delta / 2;
+                snakelist.getLast().setX(snakelist.getFirst().getX() + (float) delta /2);
+                snakelist.getLast().setY(snakelist.getFirst().getY());
+                snakelist.remove(changePos);
+                snakelist.add(0,changePos);
             }
             if (movingLeft) {
-                this.x -= (float) delta / 2;
+                snakelist.getLast().setX(snakelist.getFirst().getX() - (float) delta /2);
+                snakelist.getLast().setY(snakelist.getFirst().getY());
+                snakelist.remove(changePos);
+                snakelist.add(0,changePos);
             }
         }
-
-
-
-    }
-
-    public boolean isHead() {
-        return isHead;
     }
 
     public void setHead(boolean head) {
         isHead = head;
+    }
+
+    public float getX() {
+        return x;
+    }
+
+    public void setX(float x) {
+        this.x = x;
+    }
+
+    public float getY() {
+        return y;
+    }
+
+    public void setY(float y) {
+        this.y = y;
     }
 }

@@ -9,9 +9,9 @@ import java.util.List;
 public class SnakeMain extends BasicGame {
 
     private List<Actor> allActors;
-    private LinkedList<Actor> snakeList;
-    private Snake snakeHead = null;
+    private LinkedList<Snake> snakeList;
     private int timeSinceLastUpdate = 0;
+    public Snake changePos = snakeList.getLast();
 
     public SnakeMain(String title) {
         super(title);
@@ -30,9 +30,7 @@ public class SnakeMain extends BasicGame {
         allActors.add(snake);
         allActors.add(snake1);
 
-        if(snakeList.getFirst() instanceof Snake){
-
-        }
+       snakeList.getFirst().setHead(true);
 
 
     }
@@ -40,12 +38,9 @@ public class SnakeMain extends BasicGame {
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
 
-
-        for (Actor actor : snakeList){
-                actor.update(gameContainer, delta);
+        for (Snake snake : snakeList){
+                snake.move(gameContainer, delta, snakeList, changePos);
             }
-
-
 
 
 
@@ -59,6 +54,10 @@ public class SnakeMain extends BasicGame {
         }
     }
 
+    public LinkedList<Snake> getSnakeList() {
+        return snakeList;
+    }
+
 
     public static void main(String[] argv) {
         try {
@@ -69,4 +68,5 @@ public class SnakeMain extends BasicGame {
             e.printStackTrace();
         }
     }
+
 }
