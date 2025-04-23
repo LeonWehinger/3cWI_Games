@@ -12,13 +12,16 @@ public class Snake implements Actor {
     private boolean movingDown = false;
     private boolean movingRight = false;
     private boolean movingLeft = false;
-    private boolean isHead = false;
+    private boolean printMovesBool = false;
+    public String name;
 
 
 
-    public Snake(float x, float y) throws SlickException {
+
+    public Snake(float x, float y, String name) throws SlickException {
         this.x = x;
         this.y = y;
+        this.name = name;
     }
 
     @Override
@@ -32,23 +35,25 @@ public class Snake implements Actor {
 
     }
 
-    public boolean isHead() {
-        return isHead;
-    }
+
 
     public void move(GameContainer gameContainer, int delta, LinkedList<Snake> snakelist, Snake changePos){
-        if (isHead){
+
             if (gameContainer.getInput().isKeyPressed(Input.KEY_W)) {
                 this.movingUp = true;
                 this.movingLeft = false;
                 this.movingRight = false;
                 this.movingDown = false;
+
+
+
             }
             if (gameContainer.getInput().isKeyPressed(Input.KEY_D)) {
                 this.movingRight = true;
                 this.movingDown = false;
                 this.movingUp = false;
                 this.movingLeft = false;
+
 
             }
             if (gameContainer.getInput().isKeyPressed(Input.KEY_A)) {
@@ -82,35 +87,51 @@ public class Snake implements Actor {
             }
 
             if (movingUp) {
+                snakelist.getFirst().movingDown=false;
+                snakelist.getFirst().movingRight=false;
+                snakelist.getFirst().movingLeft=false;
                 snakelist.getLast().setY(snakelist.getFirst().getY() - (float) delta /2);
                 snakelist.getLast().setX(snakelist.getFirst().getX());
-                snakelist.remove(changePos);
-                snakelist.add(0,changePos);
+
             }
             if (movingDown) {
+                snakelist.getFirst().movingUp=false;
+                snakelist.getFirst().movingRight=false;
+                snakelist.getFirst().movingLeft=false;
                 snakelist.getLast().setY(snakelist.getFirst().getY() + (float) delta /2);
                 snakelist.getLast().setX(snakelist.getFirst().getX());
-                snakelist.remove(changePos);
-                snakelist.add(0,changePos);
+
+
             }
             if (movingRight) {
+                snakelist.getFirst().movingDown=false;
+                snakelist.getFirst().movingUp=false;
+                snakelist.getFirst().movingLeft=false;
                 snakelist.getLast().setX(snakelist.getFirst().getX() + (float) delta /2);
                 snakelist.getLast().setY(snakelist.getFirst().getY());
-                snakelist.remove(changePos);
-                snakelist.add(0,changePos);
+
             }
             if (movingLeft) {
+                snakelist.getFirst().movingDown=false;
+                snakelist.getFirst().movingRight=false;
+                snakelist.getFirst().movingUp=false;
                 snakelist.getLast().setX(snakelist.getFirst().getX() - (float) delta /2);
                 snakelist.getLast().setY(snakelist.getFirst().getY());
-                snakelist.remove(changePos);
-                snakelist.add(0,changePos);
+
             }
-        }
+
     }
 
-    public void setHead(boolean head) {
-        isHead = head;
+    public void printMoves(Snake snake){
+        System.out.println(snake.name);
+        System.out.println("Down:" + snake.isMovingDown());
+        System.out.println ("Up:" + snake.isMovingUp());
+        System.out.println("Left:" + snake.isMovingLeft());
+        System.out.println("Right:" + snake.isMovingRight());
+        System.out.println("-----------");
     }
+
+
 
     public float getX() {
         return x;
@@ -126,5 +147,21 @@ public class Snake implements Actor {
 
     public void setY(float y) {
         this.y = y;
+    }
+
+    public boolean isMovingUp() {
+        return movingUp;
+    }
+
+    public boolean isMovingDown() {
+        return movingDown;
+    }
+
+    public boolean isMovingRight() {
+        return movingRight;
+    }
+
+    public boolean isMovingLeft() {
+        return movingLeft;
     }
 }

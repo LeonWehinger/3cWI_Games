@@ -11,7 +11,8 @@ public class SnakeMain extends BasicGame {
     private List<Actor> allActors;
     private LinkedList<Snake> snakeList;
     private int timeSinceLastUpdate = 0;
-    public Snake changePos = snakeList.getLast();
+    public Snake changePos;
+    public Snake isHead;
 
     public SnakeMain(String title) {
         super(title);
@@ -23,15 +24,14 @@ public class SnakeMain extends BasicGame {
     public void init(GameContainer gameContainer) throws SlickException {
         this.allActors = new ArrayList<>();
         this.snakeList = new LinkedList<>();
-        Snake snake = new Snake(100,100);
-        Snake snake1 = new Snake(70,100);
+        Snake snake = new Snake(100,100,"1");
+        Snake snake1 = new Snake(70,100,"2");
         snakeList.add(snake);
         snakeList.add(snake1);
         allActors.add(snake);
         allActors.add(snake1);
-
-       snakeList.getFirst().setHead(true);
-
+        changePos = snakeList.getLast();
+        isHead = snakeList.getFirst();
 
     }
 
@@ -41,7 +41,15 @@ public class SnakeMain extends BasicGame {
         for (Snake snake : snakeList){
                 snake.move(gameContainer, delta, snakeList, changePos);
             }
+        snakeList.remove(changePos);
+        snakeList.add(0,changePos);
+        isHead = snakeList.getFirst();
+        changePos = snakeList.getLast();
 
+
+
+//System.out.println(changePos.name);
+      //  System.out.println(isHead.name);
 
 
     }
