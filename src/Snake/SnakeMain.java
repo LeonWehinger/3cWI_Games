@@ -24,12 +24,13 @@ public class SnakeMain extends BasicGame {
     public void init(GameContainer gameContainer) throws SlickException {
         this.allActors = new ArrayList<>();
         this.snakeList = new LinkedList<>();
-        Snake snake = new Snake(100,100,"1");
-        Snake snake1 = new Snake(70,100,"2");
-        snakeList.add(snake);
-        snakeList.add(snake1);
-        allActors.add(snake);
-        allActors.add(snake1);
+        float pos = 200;
+        for (int i = 0; i < 5; i++) {
+            Snake snake = new Snake(pos-=2,100,"Schnieke");
+            snakeList.add(snake);
+            allActors.add(snake);
+        }
+
         changePos = snakeList.getLast();
         isHead = snakeList.getFirst();
 
@@ -38,13 +39,12 @@ public class SnakeMain extends BasicGame {
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
 
-        for (Snake snake : snakeList){
-                snake.move(gameContainer, delta, snakeList, changePos);
-            }
-        snakeList.remove(changePos);
-        snakeList.add(0,changePos);
-        isHead = snakeList.getFirst();
         changePos = snakeList.getLast();
+        isHead = snakeList.getFirst();
+
+        changePos.move(gameContainer,delta,snakeList,changePos,isHead);
+
+
 
 
 
