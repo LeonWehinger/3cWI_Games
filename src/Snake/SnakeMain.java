@@ -39,6 +39,8 @@ public class SnakeMain extends BasicGame {
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
 
+
+
         changePos = snakeList.getLast();
         isHead = snakeList.getFirst();
 

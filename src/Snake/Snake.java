@@ -39,6 +39,11 @@ public class Snake implements Actor {
     public void move(GameContainer gameContainer, int delta, LinkedList<Snake> snakelist, Snake changePos, Snake isHead) {
 
 
+        if(changePos.getY()>100){
+            System.out.println("HI");
+        }
+
+
         if (gameContainer.getInput().isKeyPressed(Input.KEY_W)) {
             this.movingUp = true;
             this.movingLeft = false;
@@ -89,52 +94,45 @@ public class Snake implements Actor {
         if (movingUp) {
             changePos = snakelist.getLast();
             isHead = snakelist.getFirst();
-            snakelist.getFirst().movingDown = false;
-            snakelist.getFirst().movingRight = false;
-            snakelist.getFirst().movingLeft = false;
             snakelist.getLast().setY(isHead.getY() - (float) SPEED);
             snakelist.getLast().setX(isHead.getX());
             snakelist.remove(changePos);
             snakelist.add(0, changePos);
+            changePos.movingUp=false;
 
 
         }
         if (movingDown) {
             changePos = snakelist.getLast();
             isHead = snakelist.getFirst();
-            isHead.movingUp = false;
-            isHead.movingRight = false;
-            isHead.movingLeft = false;
             changePos.setY(isHead.getY() + (float) SPEED);
             changePos.setX(isHead.getX());
             snakelist.remove(changePos);
             snakelist.add(0, changePos);
+            changePos.movingDown=false;
+
 
 
         }
         if (movingRight) {
             changePos = snakelist.getLast();
             isHead = snakelist.getFirst();
-            isHead.movingDown = false;
-            isHead.movingUp = false;
-            isHead.movingLeft = false;
             changePos.setX(isHead.getX() + (float) SPEED);
             changePos.setY(isHead.getY());
             snakelist.remove(changePos);
             snakelist.add(0, changePos);
+            changePos.movingRight=false;
 
 
         }
         if (movingLeft) {
             changePos = snakelist.getLast();
             isHead = snakelist.getFirst();
-            isHead.movingDown = false;
-            isHead.movingRight = false;
-            isHead.movingUp = false;
             changePos.setX(isHead.getX() - (float) SPEED);
             changePos.setY(isHead.getY());
             snakelist.remove(changePos);
             snakelist.add(0, changePos);
+            changePos.movingLeft=false;
 
 
         }
