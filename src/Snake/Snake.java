@@ -26,7 +26,8 @@ public class Snake implements Actor {
 
     @Override
     public void render(Graphics graphics) {
-        graphics.fillRect(x, y, 30, 30);
+
+        graphics.fillOval(x, y, 30, 30);
     }
 
     @Override
@@ -36,109 +37,6 @@ public class Snake implements Actor {
     }
 
 
-    public void move(GameContainer gameContainer, int delta, LinkedList<Snake> snakelist, Snake changePos, Snake isHead) {
-
-
-        if(changePos.getY()>100){
-            System.out.println("HI");
-        }
-
-
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_W)) {
-            this.movingUp = true;
-            this.movingLeft = false;
-            this.movingRight = false;
-            this.movingDown = false;
-
-
-        }
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_D)) {
-            this.movingRight = true;
-            this.movingDown = false;
-            this.movingUp = false;
-            this.movingLeft = false;
-
-
-        }
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_A)) {
-            this.movingLeft = true;
-            this.movingRight = false;
-            this.movingDown = false;
-            this.movingUp = false;
-        }
-        if (gameContainer.getInput().isKeyPressed(Input.KEY_S)) {
-            this.movingDown = true;
-            this.movingUp = false;
-            this.movingLeft = false;
-            this.movingRight = false;
-
-
-        }
-
-        if (this.y >= 600) {
-            this.y = 0;
-        }
-
-        if (this.y <= -30) {
-            this.y = 600;
-        }
-
-        if (this.x >= 800) {
-            this.x = 0;
-        }
-
-        if (this.x <= -30) {
-            this.x = 800;
-        }
-
-        if (movingUp) {
-            changePos = snakelist.getLast();
-            isHead = snakelist.getFirst();
-            snakelist.getLast().setY(isHead.getY() - (float) SPEED);
-            snakelist.getLast().setX(isHead.getX());
-            snakelist.remove(changePos);
-            snakelist.add(0, changePos);
-            changePos.movingUp=false;
-
-
-        }
-        if (movingDown) {
-            changePos = snakelist.getLast();
-            isHead = snakelist.getFirst();
-            changePos.setY(isHead.getY() + (float) SPEED);
-            changePos.setX(isHead.getX());
-            snakelist.remove(changePos);
-            snakelist.add(0, changePos);
-            changePos.movingDown=false;
-
-
-
-        }
-        if (movingRight) {
-            changePos = snakelist.getLast();
-            isHead = snakelist.getFirst();
-            changePos.setX(isHead.getX() + (float) SPEED);
-            changePos.setY(isHead.getY());
-            snakelist.remove(changePos);
-            snakelist.add(0, changePos);
-            changePos.movingRight=false;
-
-
-        }
-        if (movingLeft) {
-            changePos = snakelist.getLast();
-            isHead = snakelist.getFirst();
-            changePos.setX(isHead.getX() - (float) SPEED);
-            changePos.setY(isHead.getY());
-            snakelist.remove(changePos);
-            snakelist.add(0, changePos);
-            changePos.movingLeft=false;
-
-
-        }
-
-
-    }
 
     public void printMoves(Snake snake) {
         System.out.println(snake.name);
