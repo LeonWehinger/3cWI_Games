@@ -83,6 +83,7 @@ public class SnakeMain extends BasicGame {
     public void move(GameContainer gameContainer, int delta, LinkedList<Snake> snakelist) throws SlickException {
         if (gameContainer.getInput().isKeyPressed(Input.KEY_W)) {
             this.direction = Direction.UP;
+
         }
         if (gameContainer.getInput().isKeyPressed(Input.KEY_D)) {
             this.direction = Direction.RIGHT;
