@@ -2,10 +2,16 @@ package Test2;
 
 public class Phone implements Product{
     private int Id;
-    private float Price;
+    private double Price;
     private String Title;
     private String Beschreibung;
 
+    public Phone(int id, double price, String beschreibung, String title) {
+        Id = id;
+        Price = price;
+        Beschreibung = beschreibung;
+        Title = title;
+    }
 
     @Override
     public int getId() {
@@ -13,18 +19,18 @@ public class Phone implements Product{
     }
 
     @Override
-    public float getPrice() {
-        return 0;
+    public double getPrice() {
+        return this.Price;
     }
 
     @Override
     public String getTitle() {
-        return "";
+        return this.Title;
     }
 
     @Override
     public String getBeschreibung() {
-        return "";
+        return this.Beschreibung;
     }
 
     public void Calling(){

@@ -27,7 +27,7 @@ public class Snake implements Actor {
     @Override
     public void render(Graphics graphics) {
 
-        graphics.fillOval(x, y, 30, 30);
+        graphics.fillOval(x, y, 50, 50);
     }
 
     @Override
@@ -46,6 +46,9 @@ public class Snake implements Actor {
         System.out.println("Right:" + snake.isMovingRight());
         System.out.println("-----------");
     }
+
+
+
 
 
     public float getX() {

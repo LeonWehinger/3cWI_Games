@@ -23,17 +23,17 @@ public class Shoe implements Product{
     }
 
     @Override
-    public float getPrice() {
-        return 0;
+    public double getPrice() {
+        return this.Price;
     }
 
     @Override
     public String getTitle() {
-        return "";
+        return this.Title;
     }
 
     @Override
     public String getBeschreibung() {
-        return "";
+        return this.Beschreibung;
     }
 }

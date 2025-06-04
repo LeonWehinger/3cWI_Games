@@ -2,7 +2,7 @@ package Test2;
 
 public interface Product {
     public int getId();
-    public float getPrice();
+    public double getPrice();
     public String getTitle();
     public String getBeschreibung();
 
