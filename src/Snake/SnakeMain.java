@@ -35,12 +35,7 @@ public class SnakeMain extends BasicGame {
     public void init(GameContainer gameContainer) throws SlickException {
         this.allActors = new ArrayList<>();
         this.snakeList = new LinkedList<>();
-        float pos = 200;
-        for (int i = 0; i < 500; i++) {
-            Snake snake = new Snake(pos -=speed, 100, "Schnieke");
-            snakeList.add(snake);
 
-        }
 
         SnakeBackground = new World();
         changePos = snakeList.getLast();
@@ -48,17 +43,31 @@ public class SnakeMain extends BasicGame {
 
     }
 
+    public void snakeInit(int delta, float pos) throws SlickException {
+        Snake snake = new Snake(pos -=speed*delta, 100, "Schnieke");
+        snakeList.add(snake);
+    }
+
     @Override
     public void update(GameContainer gameContainer, int delta) throws SlickException {
         this.millisSinceStart += delta;
         positioner = speed* newDelta;
         newDelta = delta;
-        if (this.millisSinceStart<3000) {
 
+        if (this.millisSinceStart<3000) {
+            float pos = 200;
+            for(int i = 0; i <= 500; i++){
+                snakeInit(delta,pos);
+            }
         }else {
             changePos = snakeList.getLast();
             isHead = snakeList.getFirst();
             move(gameContainer, delta, snakeList);
+
+            if(SnakeBackground.checkIfHitBoarder(isHead)){
+                System.out.println("Verloren");
+                gameContainer.exit();
+            }
         }
 
 
@@ -113,10 +122,10 @@ public class SnakeMain extends BasicGame {
                 System.out.println("Er will rauf!!!!!!!");
             }
         }
-            if (wantsDirection == WantsDirection.UP && isHead.getX()%50<=3){
-                this.direction = Direction.UP;
-                lastDirection = Direction.UP;
-            }
+        if (wantsDirection == WantsDirection.UP && isHead.getX()%50<=3){
+            this.direction = Direction.UP;
+            lastDirection = Direction.UP;
+        }
 
 
 
@@ -126,11 +135,11 @@ public class SnakeMain extends BasicGame {
             if (wantsDirection == WantsDirection.RIGHT){
                 System.out.println("Er will nach rechts!!!!!!!");
             }
-            }
-            if (wantsDirection == WantsDirection.RIGHT&&isHead.getY()%50<=3) {
-                this.direction = Direction.RIGHT;
-                lastDirection = Direction.RIGHT;
-            }
+        }
+        if (wantsDirection == WantsDirection.RIGHT&&isHead.getY()%50<=3) {
+            this.direction = Direction.RIGHT;
+            lastDirection = Direction.RIGHT;
+        }
 
         if (gameContainer.getInput().isKeyPressed(Input.KEY_A)&&(lastDirection==Direction.UP||lastDirection==Direction.DOWN)) {
 
@@ -139,10 +148,10 @@ public class SnakeMain extends BasicGame {
                 System.out.println("Er will nach links!!!!!!!");
             }
         }
-            if (wantsDirection == WantsDirection.LEFT&&isHead.getY()%50<=3) {
-                this.direction = Direction.LEFT;
-                lastDirection = Direction.LEFT;
-            }
+        if (wantsDirection == WantsDirection.LEFT&&isHead.getY()%50<=3) {
+            this.direction = Direction.LEFT;
+            lastDirection = Direction.LEFT;
+        }
 
         if (gameContainer.getInput().isKeyPressed(Input.KEY_S)&&(lastDirection==Direction.LEFT||lastDirection==Direction.RIGHT)) {
 
@@ -151,10 +160,10 @@ public class SnakeMain extends BasicGame {
                 System.out.println("Er will runter!!!!!!!");
             }
         }
-            if (wantsDirection == WantsDirection.DOWN&&isHead.getX()%50<=3) {
-                this.direction = Direction.DOWN;
-                lastDirection = Direction.DOWN;
-            }
+        if (wantsDirection == WantsDirection.DOWN&&isHead.getX()%50<=3) {
+            this.direction = Direction.DOWN;
+            lastDirection = Direction.DOWN;
+        }
 
 
         Snake tail = snakelist.getLast();

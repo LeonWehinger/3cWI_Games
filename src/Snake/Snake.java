@@ -27,7 +27,7 @@ public class Snake implements Actor {
     @Override
     public void render(Graphics graphics) {
 
-        graphics.fillOval(x, y, 50, 50);
+        graphics.fillOval(x, y, 45, 45);
     }
 
     @Override
